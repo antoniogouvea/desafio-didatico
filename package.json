@@ -1,0 +1,33 @@
+{
+  "name": "desafio-funcional",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node -r ./dotenv/config app/index.js",
+    "dev": "NODE_ENV=dev nodemon -r ./dotenv/config app/index.js",
+    "debug": "NODE_ENV=debug node -r ./dotenv/config inspect app/index.js",
+    "test": "NODE_ENV=test jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniogouvea/desafio-funcional.git"
+  },
+  "author": "Antonio Carlos Coutinho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antoniogouvea/desafio-funcional/issues"
+  },
+  "homepage": "https://github.com/antoniogouvea/desafio-funcional#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.6.0",
+    "mongoose": "^5.8.11",
+    "nodemon": "^2.0.2"
+  }
+}
