@@ -1,6 +1,5 @@
-const axios = require('axios');
 const contaModel = require('../models/conta.model')
-class PlanetService {
+class ContaService {
     constructor() {
 
     }
@@ -15,4 +14,4 @@ class PlanetService {
     }
 }
 
-module.exports = PlanetService
+module.exports = ContaService

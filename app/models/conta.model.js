@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const ContaSchema = new Schema({
   id:{type: String, required: false},
-  conta:{type: String, required:true},
+  conta:{type: Number, required:true},
   saldo: { type: Number, required:false}
 })
 

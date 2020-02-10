@@ -4,15 +4,15 @@ const contaController = new ContaController
 
 var schema = buildSchema(`
     type Query {
-        consultaSaldo(conta:String): String
+        consultaSaldo(conta:Int): String
     }
     type Message {
-        conta: String
-        saldo: String
+        conta: Int
+        saldo: Int
       }
     type Mutation{
-        depositar(conta: String, valor: Int) : Message
-        sacar(conta: String, valor: Int) : Message
+        depositar(conta: Int, valor: Int) : Message
+        sacar(conta: Int, valor: Int) : Message
 
     }
     
@@ -24,7 +24,6 @@ var root = {
     },
     depositar: async ({ conta, valor }) => {
         let saldo = await contaController.insertSaldo(conta, valor)
-        console.log(saldo)
         return conta, saldo
     },
     sacar: async ({ conta, valor }) => {
