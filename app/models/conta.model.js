@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 const ContaSchema = new Schema({
   id:{type: String, required: false},
-  numeroConta:{type: String, required:true},
-  saldo: { type: Number}
+  conta:{type: String, required:true},
+  saldo: { type: Number, required:false}
 })
 
 module.exports = mongoose.model('conta', ContaSchema)

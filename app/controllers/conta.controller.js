@@ -3,52 +3,55 @@ const contaService = new ContaService()
 class PlanetController {
     constructor() {}
 
-    async getSaldo(req, res) {
+    async getSaldo(conta) {
         try {
-            let conta = req.params.conta
             let retorno = await recuperaSaldo(conta)
             if (retorno != null)
-                res.status(200).json(retorno)
+                return retorno.saldo
+                let error = {
+                    message: "Conta não encontrada"
+                }
 
-            res.status(404).send('Conta Não encontrada')
+                throw new Error(error.message)
 
         } catch (error) {
-            res.status(400).send(error)
+            throw new Error(error)
 
         }
     }
-    async removeSaldo(req, res) {
+    async removeSaldo(conta, valor) {
         try {
-            let data = req.body
-            let conta = await recuperaSaldo(data.conta)
-            if(conta.saldo < data.valor){
-                return res.status(200).json('Saldo insuficiente')
+            let saldo = await recuperaSaldo(conta)
+            if (saldo.saldo < valor) {
+                let erro = {
+                    message: 'Saldo insuficiente'
+                }
+                throw new Error(erro.message)
             }
-            let novoSaldo = conta.saldo - data.valor
-            let { where = `{"numeroConta":${conta.numeroConta}}`, fields = `{"saldo":${novoSaldo}}`} = req.query
+            let novoSaldo = saldo.saldo - valor
+            let where = `{"conta":${conta}}`
+            let fields = `{"saldo":${novoSaldo}}`
             where = JSON.parse(where)
             fields = JSON.parse(fields)
             let retorno = await contaService.atualizarSaldo(where, fields)
-            res.status(200).json(`O saldo foi atualizado para : R$ ${retorno.saldo},00`)
+            return retorno
         } catch (error) {
-            res.status(400).send(error)
+            throw new Error(error)
 
         }
     }
-    async insertSaldo(req, res) {
+    async insertSaldo(conta, valor) {
         try {
-            let data = req.body
-            let conta = await recuperaSaldo(data.conta)
-            let novoSaldo = conta.saldo + data.valor
-            let {
-                where = `{"numeroConta":${conta.numeroConta}}`, fields = `{"saldo":${novoSaldo}}`
-            } = req.query
+            let saldo = await recuperaSaldo(conta)
+            let novoSaldo = saldo.saldo + valor
+            let where = `{"conta":${conta}}`
+            let fields = `{"saldo":${novoSaldo}}`
             where = JSON.parse(where)
             fields = JSON.parse(fields)
             let retorno = await contaService.atualizarSaldo(where, fields)
-            res.status(200).json(`O saldo foi atualizado para : R$ ${retorno.saldo},00`)
+            return retorno
         } catch (error) {
-            res.status(400).send(error)
+            throw new Error(error)
 
         }
 
@@ -56,7 +59,7 @@ class PlanetController {
 }
 const recuperaSaldo = async (numeroConta) => {
     let query = {
-        numeroConta: numeroConta
+        conta: numeroConta
     }
     return await contaService.getSaldo(query)
 }
