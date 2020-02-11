@@ -8,9 +8,13 @@ class ContaService {
     }
 
      atualizarSaldo(query, fields) {
-        return contaModel.findOneAndUpdate(query, fields,{
+
+        let teste = contaModel.findOneAndUpdate(query, fields,{
             new:true
         })
+        // console.log(teste)
+        return teste
+
     }
 }
 

@@ -29,23 +29,47 @@ class ContaController {
     }
     async removeSaldo(conta, valor) {
         try {
+            let error
             let saldo = await this.recuperaSaldo(conta)
-            if (saldo.saldo < valor) {
-                let erro = {
-                    message: 'Saldo insuficiente'
-                }
-                throw new Error(erro.message)
-            }
-            let novoSaldo = saldo.saldo - valor
-            let where = `{"conta":${conta}}`
-            let fields = `{"saldo":${novoSaldo}}`
-            where = JSON.parse(where)
-            fields = JSON.parse(fields)
-            let retorno = await contaService.atualizarSaldo(where, fields)
-            return retorno
-        } catch (error) {
-            throw new Error(error)
+            if (saldo != null) {
+                if (valor > 0) {
 
+                    if (saldo.saldo < valor) {
+                        let erro = {
+                            message: 'Saldo insuficiente'
+                        }
+                        throw new Error(erro.message)
+                    }
+                    let novoSaldo = saldo.saldo - valor
+                    let where = `{"conta":${conta}}`
+                    let fields = `{"saldo":${novoSaldo}}`
+                    where = JSON.parse(where)
+                    fields = JSON.parse(fields)
+                    let retorno = await this.atualizarSaldo(where, fields)
+                    if (retorno == null)
+                        throw new Error('Erro interno')
+
+                    return retorno
+                } else {
+                    error = {
+                        message: "Valor negativo"
+                    }
+                }
+            } else {
+                error = {
+                    message: "Conta não encontrada"
+                }
+            }
+        } catch (error) {
+            throw new Error(error.message)
+
+        }
+    }
+    async atualizarSaldo(where, fields) {
+        try {
+            return await contaService.atualizarSaldo(where, fields)
+        } catch (error) {
+            throw Error('Erro interno')
         }
     }
     async insertSaldo(conta, valor) {
@@ -59,8 +83,12 @@ class ContaController {
                     let fields = `{"saldo":${novoSaldo}}`
                     where = JSON.parse(where)
                     fields = JSON.parse(fields)
-                    console.log(where, fields)
-                    let retorno = await contaService.atualizarSaldo(where, fields)
+
+                    let retorno = await this.atualizarSaldo(where, fields)
+                    console.log('123', retorno)
+                    if (retorno == null)
+                        throw new Error('Erro interno')
+
                     return retorno
                 } else {
                     error = {
@@ -71,12 +99,8 @@ class ContaController {
                 error = {
                     message: "Conta não encontrada"
                 }
-
             }
-
             throw new Error(error.message)
-
-
         } catch (error) {
             throw new Error(error.message)
 
