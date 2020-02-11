@@ -85,7 +85,6 @@ class ContaController {
                     fields = JSON.parse(fields)
 
                     let retorno = await this.atualizarSaldo(where, fields)
-                    console.log('123', retorno)
                     if (retorno == null)
                         throw new Error('Erro interno')
 
