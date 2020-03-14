@@ -1,0 +1,9 @@
+<form [formGroup]="form">
+
+    <input type="text" size="40" class="search" placeholder="Buscar Wikipedia..." class="form-control"
+        id="busca" formControlName="busca" [(ngModel)]="busca">
+  </form>
+
+  <tr class="resultados" *ngFor="let resultado of resultados">
+    <td>{{resultado}}</td>
+     </tr>
