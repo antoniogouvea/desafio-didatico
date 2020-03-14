@@ -1,28 +1,15 @@
-const ContaService = require('../services/conta.service');
-const contaService = new ContaService()
+const WikiService = require('../services/wiki.service');
+const wikiService = new WikiService()
 
 class ContaController {
     constructor() {
 
     }
-    async recuperaSaldo(numeroConta) {
-        let query = {
-            conta: numeroConta
-        }
-        return await contaService.getSaldo(query)
-    }
-    async getSaldo(conta) {
+
+    async findWiki(termo) {
         try {
 
-            let retorno = await this.recuperaSaldo(conta)
-            if (retorno != null)
-                return retorno.saldo
-
-            let error = {
-                message: "Conta não encontrada"
-            }
-            throw new Error(error.message)
-
+          
         } catch (error) {
             throw new Error(error.message)
         }
