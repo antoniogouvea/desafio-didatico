@@ -1,5 +1,5 @@
 {
-  "name": "desafio-funcional",
+  "name": "desafio-didatico",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,21 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antoniogouvea/desafio-funcional.git"
+    "url": "git+https://github.com/antoniogouvea/desafio-didatico.git"
   },
   "author": "Antonio Carlos Coutinho",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/antoniogouvea/desafio-funcional/issues"
+    "url": "https://github.com/antoniogouvea/desafio-didatico/issues"
   },
-  "homepage": "https://github.com/antoniogouvea/desafio-funcional#readme",
+  "homepage": "https://github.com/antoniogouvea/desafio-didatico#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^14.6.0",
     "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
     "sinon": "^8.1.1"
