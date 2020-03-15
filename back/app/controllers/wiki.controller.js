@@ -16,7 +16,7 @@ class WikiController {
             
           
         } catch (error) {
-            return res.status(404)
+            return res.status(400)
         }
     }
 }
