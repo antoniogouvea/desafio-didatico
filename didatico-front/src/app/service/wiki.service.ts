@@ -11,7 +11,7 @@ export class WikiService {
 
 public continuosTypingBusca(busca: string) {
   const params = new HttpParams()
-  .set('nome', busca)
+  .set('termo', busca)
   return this.http.get(`${this.apiUrl}?${params}`)
 }
 }

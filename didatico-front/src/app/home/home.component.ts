@@ -9,8 +9,8 @@ import { WikiService} from '../service/wiki.service'
 export class HomeComponent implements OnInit {
 
   public form: FormGroup;
-  public resultados:any
-
+  public resultados:any;
+  public busca: String;
   constructor(public wikiService : WikiService, private formBuilder: FormBuilder) {
     this.form = formBuilder.group({
       busca: ['']
@@ -23,9 +23,14 @@ export class HomeComponent implements OnInit {
       if (queryField !== undefined && queryField !== '' && queryField !== null) {
         this.wikiService.continuosTypingBusca(queryField).subscribe((response) => {
           this.resultados = response
+          console.log(this.resultados)
         })
       }
     })
   }
 
+  clear(){
+    this.form.reset()
+    this.resultados = []
+  }
 }
